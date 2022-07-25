@@ -1,0 +1,31 @@
+<?php
+
+namespace Database\Seeders;
+
+use App\Models\Category;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
+
+class CategoriesTableSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        Category::create([
+            'name'=>'Plastic',
+            'countingUnit'=>'items',
+        ]);
+        Category::create([
+            'name' => 'Metals',
+            'countingUnit' => 'kg',
+        ]);
+        Category::create([
+            'name' => 'Electronics',
+            'countingUnit' => 'kg',
+        ]);
+    }
+}

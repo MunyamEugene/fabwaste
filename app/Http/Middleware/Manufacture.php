@@ -18,7 +18,7 @@ class Manufacture
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::user()->ismanufacture == true) {
+        if (Auth::user()->ismanufacture == true && Auth::user()->isapproved==true) {
             return $next($request);
         }
         return Response::json(['error' => 'you have not manufacture access'], 403);  

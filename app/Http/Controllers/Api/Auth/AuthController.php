@@ -10,6 +10,53 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
+    /**
+     * @OA\Post(
+     *   path="/api/collector/register",
+     *   tags={"Auth"},
+     *   summary="Collector register",
+     *   @OA\RequestBody(
+     *  @OA\JsonContent(
+     *    type="object", 
+     *    @OA\Property(property="fname", type="string"),
+     *    @OA\Property(property="lnam", type="string"),
+     *  @OA\Property(property="email", type="string"),
+     *    @OA\Property(property="password", type="string"),
+     *  @OA\Property(property="password_confirmation", type="string"),
+     *    @OA\Property(property="location", type="string"),
+     *  @OA\Property(property="phone", type="string"),
+     *    @OA\Property(property="district", type="string"),
+     *  @OA\Property(property="city", type="string"),
+     *    @OA\Property(property="streetNumber", type="string"),
+     *  @OA\Property(property="iscollector", type="boolean", example="true"),
+
+     * ),
+     * ),
+     *   @OA\Response(
+     *      response=201,
+     *       description="Success",
+     *      @OA\MediaType(
+     *           mediaType="application/json",
+     *      )
+     *   ),
+     *   @OA\Response(
+     *      response=401,
+     *       description="Unauthenticated"
+     *   ),
+     *   @OA\Response(
+     *      response=400,
+     *      description="Bad Request"
+     *   ),
+     *   @OA\Response(
+     *      response=404,
+     *      description="not found"
+     *   ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      )
+     *)
+     **/
     public function registerCollectore(Request $request)
     {
 
@@ -48,15 +95,62 @@ class AuthController extends Controller
         ]);
     }
 
+    /**
+     * @OA\Post(
+     *   path="/api/manufacture/register",
+     *   tags={"Auth"},
+     *   summary="Manufacture register",
+     *   @OA\RequestBody(
+     *  @OA\JsonContent(
+     *    type="object", 
+     *    @OA\Property(property="manufactureName", type="string"),
+     *  @OA\Property(property="email", type="string"),
+     *  @OA\Property(property="password", type="string"),
+     *  @OA\Property(property="password_confirmation", type="string"),
+     *  @OA\Property(property="location", type="string"),
+     *  @OA\Property(property="pobox", type="string"),
+     *  @OA\Property(property="phone", type="string"),
+     *  @OA\Property(property="district", type="string"),
+     *  @OA\Property(property="city", type="string"),
+     *  @OA\Property(property="streetNumber", type="string"),
+     *  @OA\Property(property="ismanufacture", type="boolean",example="true"),
+     * ),
+     * ),
+     *   @OA\Response(
+     *      response=201,
+     *       description="Success",
+     *      @OA\MediaType(
+     *           mediaType="application/json",
+     *      )
+     *   ),
+     *   @OA\Response(
+     *      response=401,
+     *       description="Unauthenticated"
+     *   ),
+     *   @OA\Response(
+     *      response=400,
+     *      description="Bad Request"
+     *   ),
+     *   @OA\Response(
+     *      response=404,
+     *      description="not found"
+     *   ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      )
+     *)
+     **/
     public function registerManufacture(Request $request)
     {
 
         $manufacture = $request->validate([
+            'manufactureName' => 'required',
             'phone' => 'required|string|size:10',
             'email' => 'required|string|email|unique:users',
             'password' => 'min:6|required_with:password_confirmation|same:password_confirmation',
             'password_confirmation' => 'min:6',
-            'manufactureName' => 'required',
+            'location'=>'required',
             'pobox'=>'required',
             'district' => 'required',
             'city' => 'required',
@@ -70,10 +164,12 @@ class AuthController extends Controller
             'pobox' => $manufacture['pobox'],
             'district' => $manufacture['district'],
             'city' => $manufacture['city'],
+            'location'=>$manufacture['location'],
             'ismanufacture' => $manufacture['ismanufacture'],
             'streetNumber' => $manufacture['streetNumber'],
             'email' => $manufacture['email'],
             'password' => Hash::make($manufacture['password']),
+        
         ]);
 
         $token = $user->createToken('authToken')->plainTextToken;
@@ -84,6 +180,43 @@ class AuthController extends Controller
         ]);
     }
 
+    /**
+     * @OA\Post(
+     *   path="/api/login",
+     *   tags={"Auth"},
+     *   summary="Login",
+     *   @OA\RequestBody(
+     *  @OA\JsonContent(
+     *    type="object", 
+     *  @OA\Property(property="email", type="string",example="sam@gmail.com"),
+     *  @OA\Property(property="password", type="string",example="password"),
+     * ),
+     * ),
+     *   @OA\Response(
+     *      response=201,
+     *       description="Success",
+     *      @OA\MediaType(
+     *           mediaType="application/json",
+     *      )
+     *   ),
+     *   @OA\Response(
+     *      response=401,
+     *       description="Unauthenticated"
+     *   ),
+     *   @OA\Response(
+     *      response=400,
+     *      description="Bad Request"
+     *   ),
+     *   @OA\Response(
+     *      response=404,
+     *      description="not found"
+     *   ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      )
+     *)
+     **/
     public function login(Request $request)
     {
 
@@ -106,6 +239,41 @@ class AuthController extends Controller
         ]);
     }
 
+    /**
+     * @OA\Post(
+     *   path="/api/logout",
+     *   tags={"Auth"},
+     *   summary="Logout",
+     *   @OA\Response(
+     *      response=201,
+     *       description="Success",
+     *      @OA\MediaType(
+     *           mediaType="application/json",
+     *      )
+     *   ),
+     *   @OA\Response(
+     *      response=401,
+     *       description="Unauthenticated"
+     *   ),
+     *   @OA\Response(
+     *      response=400,
+     *      description="Bad Request"
+     *   ),
+     *   @OA\Response(
+     *      response=404,
+     *      description="not found"
+     *   ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      )
+     *)
+     **/
+    public function logout(Request $request){
+        Auth::user()->tokens()->delete();
+        return [
+            'message' => 'user logged out'
+        ];
+    }
 
- 
 }

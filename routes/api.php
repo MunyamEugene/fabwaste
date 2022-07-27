@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['auth:sanctum'])->group(function () {
 
 //category
-Route::get('categories', [CategoryController::class, 'GetCategories']);
+Route::get('categories', [CategoryController::class, 'GetCategories'])->middleware('admin');
 Route::get('category/edit/{id}', [CategoryController::class, 'edit'])->middleware('admin');
 Route::put('category/update/{id}', [CategoryController::class, 'update'])->middleware('admin');
 Route::post('category/create', [CategoryController::class, 'create'])->middleware('admin');
@@ -38,19 +38,25 @@ Route::post('items/create/{categoryId}', [CollectedItemController::class, 'creat
 Route::delete('items/delete/{id}', [CollectedItemController::class, 'delete'])->middleware('collector');
 
 //user
-Route::get('users', [UserController::class, 'getUsers']);
-Route::get('user/show/{id}', [UserController::class, 'show']);
-Route::post('assign/collector', [UserController::class, 'assignCollector']);
-Route::put('unassign/collector', [UserController::class, 'unassignCollector']);
+Route::get('users', [UserController::class, 'getUsers'])->middleware('admin');
+Route::get('user/show/{id}', [UserController::class, 'show'])->middleware('admin');
+Route::post('assign/collector/{collectorId}/{manufactureId}', [UserController::class, 'assignCollector'])->middleware('admin');
+Route::put('unassign/collector/{collectorId}/{manufactureId}', [UserController::class, 'unassignCollector'])->middleware('admin');
 Route::get('search/collector/{location}', [UserController::class, 'searchCollector']);
-Route::delete('user/delete/{id}', [UserController::class, 'delete']);
+Route::delete('user/delete/{id}', [UserController::class, 'delete'])->middleware('admin');
 Route::get('mycollectors', [UserController::class, 'myCollectors']);
 Route::get('mymanufactures', [UserController::class, 'myManufactures']);
+Route::get('manufactures',[UserController::class, 'manufactures'])->middleware('admin');
+Route::get('collectors',[UserController::class,'collectors'])->middleware('admin');
+Route::put('approve/{id}',[UserController::class,'approve'])->middleware('admin');
 
 //UserCategory
-Route::post('choose/category', [UserCategoryController::class, 'chooseCategory']);
-Route::put('change/category', [UserCategoryController::class, 'changeCategory']);
-Route::post('delete/category', [UserCategoryController::class, 'removeCategory']);
+Route::post('choose/category/{categoryId}', [UserCategoryController::class, 'chooseCategory']);
+Route::put('change/category/{categoryId}', [UserCategoryController::class, 'changeCategory']);
+Route::post('delete/category/{categoryId}', [UserCategoryController::class, 'removeCategory']);
+
+//logout
+Route::post('logout', [AuthController::class, 'logout']);
 }
 );
 
@@ -60,3 +66,4 @@ Route::post('manufacture/register', [AuthController::class, 'registerManufacture
 Route::post('login', [AuthController::class, 'login']);
 Route::post('forgot', [NewPasswordController::class, 'forgotPassword']);
 Route::post('reset', [NewPasswordController::class, 'reset']);
+

@@ -11,16 +11,131 @@ use Illuminate\Support\Facades\Response;
 
 class CollectedItemController extends Controller
 {
+    /**
+     * @OA\Get(
+     *   path="/api/items",
+     *   tags={"Items"},
+     *   summary="Get All Items belongs to you",
+     *   @OA\Response(
+     *      response=200,
+     *       description="Success",
+     *      @OA\MediaType(
+     *           mediaType="application/json",
+     *      )
+     *   ),
+     *   @OA\Response(
+     *      response=401,
+     *      description="Unauthenticated"
+     *   ),
+     *   @OA\Response(
+     *      response=400,
+     *      description="Bad Request"
+     *   ),
+     *   @OA\Response(
+     *      response=404,
+     *      description="not found"
+     *   ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      )
+     *)
+     **/
     public function GetItems()
     {
-        $items = CollectedItem::all();
+        $items = CollectedItem::where('user_id',Auth::user()->id)->get();
         return Response::json(['data' => $items, 'status' => 200], 200);
     }
+
+    /**
+     * @OA\Get(
+     *   path="/api/items/update/{id}",
+     *   tags={"Items"},
+     *   summary="Get Items details",
+     *   @OA\Response(
+     *      response=200,
+     *       description="Success",
+     *      @OA\MediaType(
+     *           mediaType="application/json",
+     *      )
+     *   ),
+     *  @OA\Parameter(
+     *      name="id",
+     *      in="path",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="integer"
+     *      ),
+     *   ),
+     *   @OA\Response(
+     *      response=401,
+     *      description="Unauthenticated"
+     *   ),
+     *   @OA\Response(
+     *      response=400,
+     *      description="Bad Request"
+     *   ),
+     *   @OA\Response(
+     *      response=404,
+     *      description="not found"
+     *   ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      )
+     *)
+     **/
     public function edit($id)
     {
         $items = CollectedItem::findOrFail($id);
         return Response::json(['data' => $items, 'status' => 200]);
     }
+    /**
+     * @OA\Put(
+     *   path="/api/items/update/{id}",
+     *   tags={"Items"},
+     *   summary="Update items",
+     *  @OA\Parameter(
+     *      name="id",
+     *      in="path",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="integer"
+     *      ),
+     *   ),
+     * @OA\RequestBody(
+     *  @OA\JsonContent(
+     *    type="object", 
+     *    @OA\Property(property="name", type="string"),
+     *    @OA\Property(property="quantity", type="integer"),
+     * 
+     * ),
+     * ),
+     *   @OA\Response(
+     *      response=200,
+     *       description="Success",
+     *      @OA\MediaType(
+     *           mediaType="application/json",
+     *      )
+     *   ),
+     *   @OA\Response(
+     *      response=401,
+     *      description="Unauthenticated"
+     *   ),
+     *   @OA\Response(
+     *      response=400,
+     *      description="Bad Request"
+     *   ),
+     *   @OA\Response(
+     *      response=404,
+     *      description="not found"
+     *   ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      )
+     *)
+     **/
     public function update(Request $request, $id)
     {
         $request->validate(['name' => 'required', 'quantity'=> 'required|numeric']);
@@ -36,6 +151,52 @@ class CollectedItemController extends Controller
         
     }
 
+    /**
+     * @OA\Post(
+     *   path="/api/items/create/{categoryId}",
+     *   tags={"Items"},
+     *   summary="Add items",
+     * @OA\Parameter(
+     *      name="categoryId",
+     *      in="path",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="integer"
+     *      ),
+     *   ),
+     *   @OA\RequestBody(
+     *  @OA\JsonContent(
+     *    type="object", 
+     *    @OA\Property(property="name", type="string"),
+     *    @OA\Property(property="quantity", type="integer"),
+     * 
+     * ),
+     * ),
+     *   @OA\Response(
+     *      response=201,
+     *       description="Success",
+     *      @OA\MediaType(
+     *           mediaType="application/json",
+     *      )
+     *   ),
+     *   @OA\Response(
+     *      response=401,
+     *       description="Unauthenticated"
+     *   ),
+     *   @OA\Response(
+     *      response=400,
+     *      description="Bad Request"
+     *   ),
+     *   @OA\Response(
+     *      response=404,
+     *      description="not found"
+     *   ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      )
+     *)
+     **/
     public function create(Request $request,$categoryId)
     {
         $request->validate(['name' => 'required', 'quantity' => 'required|numeric']);
@@ -48,6 +209,44 @@ class CollectedItemController extends Controller
         return Response::json(['message' => 'created successfully', 'status' => 200], 200);
     }
 
+    /**
+     * @OA\Delete(
+     *   path="/api/items/delete/{id}",
+     *   tags={"Items"},
+     *   summary="delete items",
+     *  @OA\Parameter(
+     *      name="id",
+     *      in="path",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="integer"
+     *      ),
+     *   ),
+     *   @OA\Response(
+     *      response=200,
+     *       description="Success",
+     *      @OA\MediaType(
+     *           mediaType="application/json",
+     *      )
+     *   ),
+     *   @OA\Response(
+     *      response=401,
+     *      description="Unauthenticated"
+     *   ),
+     *   @OA\Response(
+     *      response=400,
+     *      description="Bad Request"
+     *   ),
+     *   @OA\Response(
+     *      response=404,
+     *      description="not found"
+     *   ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      )
+     *)
+     **/
     public function delete($id){
         $items=CollectedItem::find($id);
         $items->delete();

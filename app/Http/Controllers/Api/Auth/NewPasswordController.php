@@ -13,6 +13,42 @@ use Illuminate\Support\Str;
 
 class NewPasswordController extends Controller
 {
+    /**
+     * @OA\Post(
+     *   path="/api/forgot",
+     *   tags={"Auth"},
+     *   summary="Forgot password",
+     *   @OA\RequestBody(
+     *  @OA\JsonContent(
+     *    type="object", 
+     *  @OA\Property(property="email", type="string",example="sam@gmail.com"),
+     * ),
+     * ),
+     *   @OA\Response(
+     *      response=201,
+     *       description="Success",
+     *      @OA\MediaType(
+     *           mediaType="application/json",
+     *      )
+     *   ),
+     *   @OA\Response(
+     *      response=401,
+     *       description="Unauthenticated"
+     *   ),
+     *   @OA\Response(
+     *      response=400,
+     *      description="Bad Request"
+     *   ),
+     *   @OA\Response(
+     *      response=404,
+     *      description="not found"
+     *   ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      )
+     *)
+     **/
     public function forgotPassword(Request $request){
         $request->validate(['email'=>'required|email']);
         $status=Password::sendResetLink($request->only('email'));
@@ -23,6 +59,46 @@ class NewPasswordController extends Controller
             'email'=>[trans($status)]
         ]);
     }
+
+    /**
+     * @OA\Post(
+     *   path="/api/reset",
+     *   tags={"Auth"},
+     *   summary="Reset password",
+     *   @OA\RequestBody(
+     *  @OA\JsonContent(
+     *    type="object", 
+     *  @OA\Property(property="email", type="string",example="sam@gmail.com"),
+     *  @OA\Property(property="password", type="string",example="password"),
+     *  @OA\Property(property="password-confirmation", type="string"),
+     * @OA\Property(property="token"),
+     * ),
+     * ),
+     *   @OA\Response(
+     *      response=201,
+     *       description="Success",
+     *      @OA\MediaType(
+     *           mediaType="application/json",
+     *      )
+     *   ),
+     *   @OA\Response(
+     *      response=401,
+     *       description="Unauthenticated"
+     *   ),
+     *   @OA\Response(
+     *      response=400,
+     *      description="Bad Request"
+     *   ),
+     *   @OA\Response(
+     *      response=404,
+     *      description="not found"
+     *   ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      )
+     *)
+     **/
     public function reset(Request $request){
         $request->validate([
             'token' => 'required',

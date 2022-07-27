@@ -29,6 +29,9 @@ class ItemsObserver
     public function updated(CollectedItem $item)
     {
         $previous=History::orderBy('updated_at','DESC')->first();
+        if($previous!==null){
+            $previous=CollectedItem::find($item->id-1);
+        }
         $history = new History();
         $history->oldNumber = $previous->remainNumber;
         $history->newNumber = ($item->quantity-$previous->remainNumber);

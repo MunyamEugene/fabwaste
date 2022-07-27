@@ -18,7 +18,7 @@ class Collector
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::user()->iscollector == true) {
+        if (Auth::user()->iscollector == true && Auth::user()->isapproved==true) {
             return $next($request);
         }
         return Response::json(['error' => 'you have not collector access'], 403);

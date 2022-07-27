@@ -328,14 +328,6 @@ class UserController extends Controller
      *   tags={"users"},
      *   summary="collector's manufactures",
      *   security={{"sanctum":{}}},
-     *    @OA\Parameter(
-     *      name="id",
-     *      in="path",
-     *      required=true,
-     *      @OA\Schema(
-     *           type="integer"
-     *      ),
-     *   ),
      *   @OA\Response(
      *      response=200,
      *       description="Success",

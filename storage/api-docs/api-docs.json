@@ -1225,16 +1225,6 @@
                 ],
                 "summary": "collector's manufactures",
                 "operationId": "cf18f85dee7797fb607b11a139ad5184",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
                 "responses": {
                     "200": {
                         "description": "Success",

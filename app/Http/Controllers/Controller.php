@@ -28,7 +28,7 @@ use Illuminate\Routing\Controller as BaseController;
  *      description="Demo API Server"
  * ),
  * @OAS\SecurityScheme(
- *     securitySchema="bearer_token",
+ *     securitySchema="sanctum",
  *     type="http",
  *     scheme="bearer",
  *     in="header"

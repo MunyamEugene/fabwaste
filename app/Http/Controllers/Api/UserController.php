@@ -16,6 +16,7 @@ class UserController extends Controller
      *   path="/api/users",
      *   tags={"users"},
      *   summary="All users",
+     *   security={{"sanctum":{}}},
      *   @OA\Response(
      *          response=200,
      *          description="Successful operation",
@@ -52,7 +53,7 @@ class UserController extends Controller
      *   path="/api/user/show/{id}",
      *   tags={"users"},
      *   summary="user Detail",
-     *   security={{"bearer_token":{}}},
+     *   security={{"sanctum":{}}},
      *   @OA\Parameter(
      *      name="id",
      *      in="path",
@@ -97,6 +98,7 @@ class UserController extends Controller
      *   path="/api/collectors",
      *   tags={"users"},
      *   summary="All collectors",
+     *   security={{"sanctum":{}}},
      *   @OA\Response(
      *          response=200,
      *          description="Successful operation",
@@ -133,6 +135,7 @@ class UserController extends Controller
      *   path="/api/manufactures",
      *   tags={"users"},
      *   summary="All manufactures",
+     *   security={{"sanctum":{}}},
      *   @OA\Response(
      *          response=200,
      *          description="Successful operation",
@@ -169,6 +172,7 @@ class UserController extends Controller
      *   path="/api/assign/collector/{collectorId}/{manufactureId}",
      *   tags={"users"},
      *   summary="assign collector to manufacture",
+     *   security={{"sanctum":{}}},
      *   @OA\Parameter(
      *      name="collectorId",
      *      in="path",
@@ -224,6 +228,7 @@ class UserController extends Controller
      *   path="/api/assign/collector/{collectorId}/{manufactureId}",
      *   tags={"users"},
      *   summary="unassign collector to manufacture",
+     *   security={{"sanctum":{}}},
      *   @OA\Parameter(
      *      name="collectorId",
      *      in="path",
@@ -276,6 +281,7 @@ class UserController extends Controller
      *   path="/api/assign/user/search/{location}",
      *   tags={"users"},
      *   summary="search collector",
+     *   security={{"sanctum":{}}},
      *   @OA\Parameter(
      *      name="location",
      *      in="path",
@@ -321,6 +327,7 @@ class UserController extends Controller
      *   path="/api/mymanufactures",
      *   tags={"users"},
      *   summary="collector's manufactures",
+     *   security={{"sanctum":{}}},
      *    @OA\Parameter(
      *      name="id",
      *      in="path",
@@ -367,6 +374,7 @@ class UserController extends Controller
      *   path="/api/mycollectors",
      *   tags={"users"},
      *   summary="manufacture's collectors",
+     *   security={{"sanctum":{}}},
      *   @OA\Response(
      *      response=200,
      *       description="Success",
@@ -406,6 +414,7 @@ class UserController extends Controller
      *   path="/api/approve/{id}",
      *   tags={"users"},
      *   summary="approve user account",
+     *   security={{"sanctum":{}}},
      *   @OA\Parameter(
      *      name="id",
      *      in="path",
@@ -456,6 +465,7 @@ class UserController extends Controller
      *   path="/api/user/delete/{id}",
      *   tags={"users"},
      *   summary="delete user",
+     *   security={{"sanctum":{}}},
      *   @OA\Response(
      *      response=200,
      *       description="Success",

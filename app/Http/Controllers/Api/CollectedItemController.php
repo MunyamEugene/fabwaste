@@ -16,6 +16,7 @@ class CollectedItemController extends Controller
      *   path="/api/items",
      *   tags={"Items"},
      *   summary="Get All Items belongs to you",
+     *   security={{"sanctum":{}}},
      *   @OA\Response(
      *      response=200,
      *       description="Success",
@@ -52,6 +53,7 @@ class CollectedItemController extends Controller
      *   path="/api/items/update/{id}",
      *   tags={"Items"},
      *   summary="Get Items details",
+     *   security={{"sanctum":{}}},
      *   @OA\Response(
      *      response=200,
      *       description="Success",
@@ -95,6 +97,7 @@ class CollectedItemController extends Controller
      *   path="/api/items/update/{id}",
      *   tags={"Items"},
      *   summary="Update items",
+     *   security={{"sanctum":{}}},
      *  @OA\Parameter(
      *      name="id",
      *      in="path",
@@ -156,6 +159,7 @@ class CollectedItemController extends Controller
      *   path="/api/items/create/{categoryId}",
      *   tags={"Items"},
      *   summary="Add items",
+     *   security={{"sanctum":{}}},
      * @OA\Parameter(
      *      name="categoryId",
      *      in="path",
@@ -214,6 +218,7 @@ class CollectedItemController extends Controller
      *   path="/api/items/delete/{id}",
      *   tags={"Items"},
      *   summary="delete items",
+     *   security={{"sanctum":{}}},
      *  @OA\Parameter(
      *      name="id",
      *      in="path",

@@ -15,6 +15,7 @@ class CategoryController extends Controller
      * @OA\Get(
      *   path="/api/categories",
      *   tags={"Category"},
+     *   security={{"sanctum":{}}},
      *   summary="All categories",
      *   @OA\Response(
      *      response=200,
@@ -50,6 +51,7 @@ class CategoryController extends Controller
      *   path="/api/category/edit/{id}",
      *   tags={"Category"},
      *   summary="category details",
+     *   security={{"sanctum":{}}},
      * @OA\Parameter(
      *      name="id",
      *      in="path",
@@ -101,6 +103,7 @@ class CategoryController extends Controller
      *   path="/api/category/update/{id}",
      *   tags={"Category"},
      *   summary="Update category",
+     *   security={{"sanctum":{}}},
      * @OA\Parameter(
      *      name="categoryId",
      *      in="path",
@@ -156,6 +159,7 @@ class CategoryController extends Controller
      *   path="/api/category/create",
      *   tags={"Category"},
      *   summary="create category",
+     *  security={{"sanctum":{}}},
      *   @OA\RequestBody(
      *  @OA\JsonContent(
      *    type="object", 
@@ -203,6 +207,7 @@ class CategoryController extends Controller
      *   path="/api/category/delete/{id}",
      *   tags={"Category"},
      *   summary="delete category",
+     *   security={{"sanctum":{}}},
      * @OA\Parameter(
      *      name="categoryId",
      *      in="path",

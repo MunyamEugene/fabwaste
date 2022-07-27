@@ -16,6 +16,7 @@ class UserCategoryController extends Controller
      *   path="/api/choose/category/{id}",
      *   tags={"users"},
      *   summary="choose category",
+     *   security={{"sanctum":{}}},
      *   @OA\Parameter(
      *      name="categoryId",
      *      in="path",
@@ -61,6 +62,7 @@ class UserCategoryController extends Controller
      *   path="/api/change/category/{id}",
      *   tags={"users"},
      *   summary="change category",
+     *   security={{"sanctum":{}}},
      *   @OA\Parameter(
      *      name="categoryId",
      *      in="path",

@@ -244,6 +244,7 @@ class AuthController extends Controller
      *   path="/api/logout",
      *   tags={"Auth"},
      *   summary="Logout",
+     * security={{"sanctum":{}}},
      *   @OA\Response(
      *      response=201,
      *       description="Success",

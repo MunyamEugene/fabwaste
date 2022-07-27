@@ -43,28 +43,26 @@ class UsersTableSeeder extends Seeder
         ]);
 
         User::create([
-            'fname' => 'hakiza',
-            'lname' => 'jean',
-            'location' => 'Nyamirambo',
+            'manufactureName' => 'INYANGE INDUSTRY',
+            'location' => 'murindi kigali',
             'phone' => '0789596723',
-            'email' => 'hakiza@gmail.com',
+            'email' => 'inyange@gmail.com',
             'password' => Hash::make('password'),
-            'district' => 'Nyarugenge',
+            'district' => 'Kicukiro',
             'city' => 'kigali',
-            'streetNumber' => 'kn105st',
+            'streetNumber' => 'kk105st',
             'ismanufacture' => true
         ]);
 
         User::create([
-            'fname' => 'mugabo',
-            'lname' => 'robert',
-            'location' => 'kimironko',
+            'fname' => 'BRALIRWA',
+            'location' => 'sonatubes',
             'phone' => '0789333784',
-            'email' => 'mugabo@gmail.com',
+            'email' => 'bralirwa@gmail.com',
             'password' => Hash::make('password'),
-            'district' => 'gasabo',
+            'district' => 'kicukiro',
             'city' => 'kigali',
-            'streetNumber' => 'kg105st',
+            'streetNumber' => 'kk304st',
             'ismanufacture' => true
         ]);
 
@@ -73,7 +71,7 @@ class UsersTableSeeder extends Seeder
             'lname' => 'john',
             'location' => 'fablab',
             'phone' => '0745893784',
-            'email' => 'sam@gmail.com',
+            'email' => 'admin@gmail.com',
             'password' => Hash::make('password'),
             'district' => 'gasabo',
             'city' => 'kigali',

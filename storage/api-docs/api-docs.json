@@ -14,7 +14,7 @@
     },
     "servers": [
         {
-            "url": "http://127.0.0.1:8000/",
+            "url": "https://powerful-everglades-87307.herokuapp.com/",
             "description": "Demo API Server"
         }
     ],

@@ -445,11 +445,11 @@ class UserController extends Controller
         if($collector->isapproved){
             $collector->isapproved=0;
             $collector->save();
-            return Response::json(['message' => $collector->fname . '\'s accunt approved', 'status' => 201]);
+            return Response::json(['message' => $collector->fname . '\'s accunt disapproved', 'status' => 201]);
         }else{
         $collector->isapproved=1;
         $collector->save();
-        return Response::json(['message'=>$collector->fname. '\'s accunt disapproved','status'=>201]);
+        return Response::json(['message'=>$collector->fname. '\'s accunt approved','status'=>201]);
         }
     }
     /**

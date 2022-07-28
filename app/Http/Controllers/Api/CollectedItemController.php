@@ -44,7 +44,7 @@ class CollectedItemController extends Controller
      **/
     public function GetItems()
     {
-        $items = CollectedItem::where('user_id',Auth::user()->id)->get();
+        $items = CollectedItem::where('user_id',Auth::user()->id)->with('history')->get();
         return Response::json(['data' => $items, 'status' => 200], 200);
     }
 

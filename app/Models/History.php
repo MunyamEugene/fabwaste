@@ -14,4 +14,7 @@ class History extends Model
         'remainNumber',
         'item_id'
     ];
+    protected $hidden = [
+        'pivot'
+    ];
 }

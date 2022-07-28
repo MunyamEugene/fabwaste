@@ -21,6 +21,6 @@ class Collector
         if (Auth::user()->iscollector == true && Auth::user()->isapproved==true) {
             return $next($request);
         }
-        return Response::json(['error' => 'you have not collector access'], 403);
+        return Response::json(['error' => 'you neither have collector access nor approved'], 403);
     }
 }

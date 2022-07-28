@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['auth:sanctum'])->group(function () {
 
 //category
-Route::get('categories', [CategoryController::class, 'GetCategories'])->middleware('admin');
+Route::get('categories', [CategoryController::class, 'GetCategories']);
 Route::get('category/edit/{id}', [CategoryController::class, 'edit'])->middleware('admin');
 Route::put('category/update/{id}', [CategoryController::class, 'update'])->middleware('admin');
 Route::post('category/create', [CategoryController::class, 'create'])->middleware('admin');

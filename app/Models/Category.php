@@ -14,6 +14,10 @@ class Category extends Model
         'counting_id'
     ];
 
+    protected $hidden=[
+        'pivot'
+    ];
+
 
     public function users(){
         return $this->belongsToMany(User::class,'category_users');

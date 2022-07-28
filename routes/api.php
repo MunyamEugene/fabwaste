@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware(['auth:sanctum'])->group(function () {
+Route::middleware(['auth:sanctum','cors'])->group(function () {
 
 //category
 Route::get('categories', [CategoryController::class, 'GetCategories']);

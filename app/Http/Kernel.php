@@ -67,5 +67,6 @@ class Kernel extends HttpKernel
         'admin'=>\App\Http\Middleware\Admin::class,
         'manufacture'=> \App\Http\Middleware\Manufacture::class,
         'collector' => \App\Http\Middleware\Collector::class,
+        'cors'=> \App\Http\Middleware\Cors::class,
     ];
 }

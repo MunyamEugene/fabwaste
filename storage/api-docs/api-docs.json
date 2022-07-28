@@ -181,7 +181,7 @@
                                 "properties": {
                                     "email": {
                                         "type": "string",
-                                        "example": "sam@gmail.com"
+                                        "example": "admin@gmail.com"
                                     },
                                     "password": {
                                         "type": "string",
@@ -630,13 +630,13 @@
                 ]
             }
         },
-        "/api/items/update/{id}": {
+        "/api/items/show/{id}": {
             "get": {
                 "tags": [
                     "Items"
                 ],
                 "summary": "Get Items details",
-                "operationId": "23c5694bbecd44107d74034d0a04c74d",
+                "operationId": "547905f0677a7a01e04b097393ef25a1",
                 "parameters": [
                     {
                         "name": "id",
@@ -672,7 +672,9 @@
                         "sanctum": []
                     }
                 ]
-            },
+            }
+        },
+        "/api/items/update/{id}": {
             "put": {
                 "tags": [
                     "Items"

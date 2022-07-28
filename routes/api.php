@@ -32,7 +32,7 @@ Route::delete('category/delete/{id}', [CategoryController::class, 'delete'])->mi
 
 //items
 Route::get('items', [CollectedItemController::class, 'GetItems'])->middleware('collector');
-Route::get('items/edit/{id}', [CollectedItemController::class, 'edit'])->middleware('collector');
+Route::get('items/show/{id}', [CollectedItemController::class, 'show'])->middleware('collector');
 Route::put('items/update/{id}', [CollectedItemController::class, 'update'])->middleware('collector');
 Route::post('items/create/{categoryId}', [CollectedItemController::class, 'create'])->middleware('collector');
 Route::delete('items/delete/{id}', [CollectedItemController::class, 'delete'])->middleware('collector');

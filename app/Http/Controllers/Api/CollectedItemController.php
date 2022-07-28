@@ -50,7 +50,7 @@ class CollectedItemController extends Controller
 
     /**
      * @OA\Get(
-     *   path="/api/items/update/{id}",
+     *   path="/api/items/show/{id}",
      *   tags={"Items"},
      *   summary="Get Items details",
      *   security={{"sanctum":{}}},
@@ -87,7 +87,7 @@ class CollectedItemController extends Controller
      *      )
      *)
      **/
-    public function edit($id)
+    public function show($id)
     {
         $items = CollectedItem::findOrFail($id);
         return Response::json(['data' => $items, 'status' => 200]);

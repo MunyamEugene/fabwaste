@@ -474,6 +474,9 @@
                                     },
                                     "unit": {
                                         "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
                                     }
                                 },
                                 "type": "object"

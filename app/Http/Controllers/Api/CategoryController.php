@@ -118,6 +118,7 @@ class CategoryController extends Controller
      *    type="object", 
      *    @OA\Property(property="name", type="string"),
      *    @OA\Property(property="unit", type="string"),
+     *    @OA\Property(property="description", type="string"),
      * 
      * ),
      * ),
@@ -147,10 +148,11 @@ class CategoryController extends Controller
      *)
      **/
     public function update(Request $request,$id){
-        $request->validate(['name'=>'required','unit'=>'required']);
+        $request->validate(['name'=>'required','unit'=>'required', 'description'=>'required']);
         $category = Category::findOrFail($id);
         $category->name=$request->input('name');
         $category->countingUnit = $request->input('unit');
+        $category->description=$request->input('description');
         $category->save();
         return Response::json(['message'=>'updated successfully','status'=>200],200);
     }
@@ -166,7 +168,7 @@ class CategoryController extends Controller
      *    type="object", 
      *    @OA\Property(property="name", type="string"),
      *    @OA\Property(property="unit", type="string"),
-     *   @OA\Property(property="description", type="string"),
+     *    @OA\Property(property="description", type="string"),
      * 
      * ),
      * ),

@@ -52,6 +52,9 @@
                                     "phone": {
                                         "type": "string"
                                     },
+                                    "province": {
+                                        "type": "string"
+                                    },
                                     "district": {
                                         "type": "string"
                                     },
@@ -124,6 +127,9 @@
                                         "type": "string"
                                     },
                                     "phone": {
+                                        "type": "string"
+                                    },
+                                    "province": {
                                         "type": "string"
                                     },
                                     "district": {
@@ -518,6 +524,9 @@
                                         "type": "string"
                                     },
                                     "unit": {
+                                        "type": "string"
+                                    },
+                                    "description": {
                                         "type": "string"
                                     }
                                 },

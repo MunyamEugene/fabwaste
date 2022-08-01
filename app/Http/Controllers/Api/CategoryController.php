@@ -56,18 +56,11 @@ class CategoryController extends Controller
      *      name="id",
      *      in="path",
      *      required=true,
+     *      description="categoryId",
      *      @OA\Schema(
      *           type="integer"
      *      ),
      *   ),
-     *  @OA\RequestBody(
-     *  @OA\JsonContent(
-     *    type="object", 
-     *    @OA\Property(property="name", type="string"),
-     *    @OA\Property(property="unit", type="string"),
-     * 
-     * ),
-     * ),
      *   @OA\Response(
      *      response=200,
      *       description="Success",

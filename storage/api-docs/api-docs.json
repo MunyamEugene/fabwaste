@@ -14,7 +14,7 @@
     },
     "servers": [
         {
-            "url": "https://powerful-everglades-87307.herokuapp.com/",
+            "url": "http://127.0.0.1:8000/",
             "description": "Demo API Server"
         }
     ],
@@ -31,10 +31,10 @@
                         "application/json": {
                             "schema": {
                                 "properties": {
-                                    "fname": {
+                                    "firstName": {
                                         "type": "string"
                                     },
-                                    "lnam": {
+                                    "lastName": {
                                         "type": "string"
                                     },
                                     "email": {
@@ -379,13 +379,13 @@
                 ]
             }
         },
-        "/api/category/edit/{id}": {
+        "/api/category/show/{id}": {
             "get": {
                 "tags": [
                     "Category"
                 ],
                 "summary": "category details",
-                "operationId": "b155a4a02e8c1a11e2ea4fe3c4a2bdfd",
+                "operationId": "02059c959a7c12cf7d98f47badd37237",
                 "parameters": [
                     {
                         "name": "id",
@@ -449,8 +449,9 @@
                 "operationId": "614b3c009b2f429450b350dc41becfa5",
                 "parameters": [
                     {
-                        "name": "categoryId",
+                        "name": "id",
                         "in": "path",
+                        "description": "categoryId",
                         "required": true,
                         "schema": {
                             "type": "integer"
@@ -561,8 +562,9 @@
                 "operationId": "8b50f4f1eccbeb31ed9c3a11963cb469",
                 "parameters": [
                     {
-                        "name": "categoryId",
+                        "name": "id",
                         "in": "path",
+                        "description": "categoryId",
                         "required": true,
                         "schema": {
                             "type": "integer"

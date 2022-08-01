@@ -68,5 +68,6 @@ class Kernel extends HttpKernel
         'manufacture'=> \App\Http\Middleware\Manufacture::class,
         'collector' => \App\Http\Middleware\Collector::class,
         'cors'=> \App\Http\Middleware\Cors::class,
+        'login' => \App\Http\Middleware\Login::class,
     ];
 }

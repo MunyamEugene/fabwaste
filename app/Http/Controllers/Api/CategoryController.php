@@ -48,7 +48,7 @@ class CategoryController extends Controller
     }
     /**
      * @OA\Get(
-     *   path="/api/category/edit/{id}",
+     *   path="/api/category/show/{id}",
      *   tags={"Category"},
      *   summary="category details",
      *   security={{"sanctum":{}}},
@@ -105,9 +105,10 @@ class CategoryController extends Controller
      *   summary="Update category",
      *   security={{"sanctum":{}}},
      * @OA\Parameter(
-     *      name="categoryId",
+     *      name="id",
      *      in="path",
      *      required=true,
+     *      description="categoryId",
      *      @OA\Schema(
      *           type="integer"
      *      ),
@@ -209,9 +210,10 @@ class CategoryController extends Controller
      *   summary="delete category",
      *   security={{"sanctum":{}}},
      * @OA\Parameter(
-     *      name="categoryId",
+     *      name="id",
      *      in="path",
      *      required=true,
+     *      description="categoryId",
      *      @OA\Schema(
      *           type="integer"
      *      ),

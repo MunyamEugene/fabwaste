@@ -18,8 +18,8 @@ class AuthController extends Controller
      *   @OA\RequestBody(
      *  @OA\JsonContent(
      *    type="object", 
-     *    @OA\Property(property="fname", type="string"),
-     *    @OA\Property(property="lnam", type="string"),
+     *    @OA\Property(property="firstName", type="string"),
+     *    @OA\Property(property="lastName", type="string"),
      *  @OA\Property(property="email", type="string"),
      *    @OA\Property(property="password", type="string"),
      *  @OA\Property(property="password_confirmation", type="string"),
@@ -65,8 +65,8 @@ class AuthController extends Controller
             'email' => 'required|string|email|unique:users',
             'password' => 'min:6|required_with:password_confirmation|same:password_confirmation',
             'password_confirmation' => 'min:6',
-            'fname'=>'required',
-            'lname' => 'required',
+            'firstName'=>'required',
+            'lastName' => 'required',
             'location'=>'required',
             'district' => 'required',
             'city' => 'required',
@@ -74,9 +74,9 @@ class AuthController extends Controller
             'iscollector'=>'required',
         ]);
 
-        $user = User::create([
-            'fname' => $collector['fname'],
-            'lname' => $collector['lname'],
+         User::create([
+            'fname' => $collector['firstName'],
+            'lname' => $collector['lastName'],
             'location' => $collector['location'],
             'phone' => $collector['phone'],
             'district' => $collector['district'],
@@ -86,12 +86,9 @@ class AuthController extends Controller
             'email' => $collector['email'],
             'password' => Hash::make($collector['password']),
         ]);
-
-        $token = $user->createToken('authToken')->plainTextToken;
         return response()->json([
-            'access_token' => $token,
-            'token_type' => 'Bearer',
-            'user'=>$user
+            'title' => 'Thank you for using our system!',
+            'body'=>'You account is being reviewed by admin, you will receive an approval email',
         ]);
     }
 
@@ -171,12 +168,8 @@ class AuthController extends Controller
             'password' => Hash::make($manufacture['password']),
         
         ]);
-
-        $token = $user->createToken('authToken')->plainTextToken;
         return response()->json([
-            'access_token' => $token,
-            'token_type' => 'Bearer',
-            'user' => $user
+            'message' => 'email of'  .$user->manufactureName .'\'s  credentials has been sent',
         ]);
     }
 

@@ -24,7 +24,7 @@ Route::middleware(['auth:sanctum','cors'])->group(function () {
 
 //category
 Route::get('categories', [CategoryController::class, 'GetCategories']);
-Route::get('category/edit/{id}', [CategoryController::class, 'edit'])->middleware('admin');
+Route::get('category/show/{id}', [CategoryController::class, 'edit'])->middleware('admin');
 Route::put('category/update/{id}', [CategoryController::class, 'update'])->middleware('admin');
 Route::post('category/create', [CategoryController::class, 'create'])->middleware('admin');
 Route::delete('category/delete/{id}', [CategoryController::class, 'delete'])->middleware('admin');
@@ -63,7 +63,7 @@ Route::post('logout', [AuthController::class, 'logout']);
 //Authentication
 Route::post('collector/register', [AuthController::class, 'registerCollectore']);
 Route::post('manufacture/register', [AuthController::class, 'registerManufacture']);
-Route::post('login', [AuthController::class, 'login']);
+Route::post('login', [AuthController::class, 'login'])->middleware('login');
 Route::post('forgot', [NewPasswordController::class, 'forgotPassword']);
 Route::post('reset', [NewPasswordController::class, 'reset']);
 

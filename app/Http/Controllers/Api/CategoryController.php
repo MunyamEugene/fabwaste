@@ -166,6 +166,7 @@ class CategoryController extends Controller
      *    type="object", 
      *    @OA\Property(property="name", type="string"),
      *    @OA\Property(property="unit", type="string"),
+     *   @OA\Property(property="description", type="string"),
      * 
      * ),
      * ),
@@ -195,10 +196,11 @@ class CategoryController extends Controller
      *)
      **/
     public function create(Request $request){
-        $request->validate(['name' => 'required','unit'=>'required']);
+        $request->validate(['name' => 'required','unit'=>'required','description'=>'required']);
         $category = new Category();
         $category->name=$request->input('name');
         $category->countingUnit=$request->input('unit');
+        $category->description=$request->input('description');
         $category->save();
         return Response::json(['message'=>'created successfully','status'=>200],200);
     }

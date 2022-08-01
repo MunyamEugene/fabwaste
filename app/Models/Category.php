@@ -11,7 +11,8 @@ class Category extends Model
 
     protected $fillable=[
         'name',
-        'counting_id'
+        'counting_id',
+        'description'
     ];
 
     protected $hidden=[

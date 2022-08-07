@@ -14,7 +14,7 @@
     },
     "servers": [
         {
-            "url": "https://powerful-everglades-87307.herokuapp.com/",
+            "url": "http://127.0.0.1:8000/",
             "description": "Demo API Server"
         }
     ],
@@ -391,7 +391,7 @@
                     "Category"
                 ],
                 "summary": "category details",
-                "operationId": "02059c959a7c12cf7d98f47badd37237",
+                "operationId": "f1621d5d86344116eb9444ed30a2e2ae",
                 "parameters": [
                     {
                         "name": "id",
@@ -594,13 +594,13 @@
                 ]
             }
         },
-        "/api/items": {
+        "/api/materials": {
             "get": {
                 "tags": [
-                    "Items"
+                    "material"
                 ],
-                "summary": "Get All Items belongs to you",
-                "operationId": "68f3c205d708c0ba25e4f1fd6c535bd3",
+                "summary": "Get All materials belong to you",
+                "operationId": "00f8d495107290c23aedbfd3bc1f13e2",
                 "responses": {
                     "200": {
                         "description": "Success",
@@ -628,17 +628,18 @@
                 ]
             }
         },
-        "/api/items/show/{id}": {
+        "/api/material/show/{id}": {
             "get": {
                 "tags": [
-                    "Items"
+                    "material"
                 ],
-                "summary": "Get Items details",
-                "operationId": "547905f0677a7a01e04b097393ef25a1",
+                "summary": "Get material details",
+                "operationId": "2a6696e9afd6998ad6179f9d88f2a7cd",
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
+                        "description": "materialId",
                         "required": true,
                         "schema": {
                             "type": "integer"
@@ -672,17 +673,18 @@
                 ]
             }
         },
-        "/api/items/update/{id}": {
+        "/api/material/update/{id}": {
             "put": {
                 "tags": [
-                    "Items"
+                    "material"
                 ],
-                "summary": "Update items",
-                "operationId": "a24b7bcd27985c3b2f11eb6e7844e440",
+                "summary": "Update material",
+                "operationId": "6ed8af3bfdce47110e90ac5dbcfa2d7e",
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
+                        "description": "materialId",
                         "required": true,
                         "schema": {
                             "type": "integer"
@@ -697,8 +699,8 @@
                                     "name": {
                                         "type": "string"
                                     },
-                                    "quantity": {
-                                        "type": "integer"
+                                    "description": {
+                                        "type": "string"
                                     }
                                 },
                                 "type": "object"
@@ -733,17 +735,18 @@
                 ]
             }
         },
-        "/api/items/create/{categoryId}": {
+        "/api/material/create/{id}": {
             "post": {
                 "tags": [
-                    "Items"
+                    "material"
                 ],
-                "summary": "Add items",
-                "operationId": "3bc11f31e46b5a331363f8ba3d9bc741",
+                "summary": "what are materials they collect",
+                "operationId": "e9e2aa08dbfb26075aba3eb93d85b415",
                 "parameters": [
                     {
-                        "name": "categoryId",
+                        "name": "id",
                         "in": "path",
+                        "description": "categoryId",
                         "required": true,
                         "schema": {
                             "type": "integer"
@@ -758,7 +761,189 @@
                                     "name": {
                                         "type": "string"
                                     },
-                                    "quantity": {
+                                    "description": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "not found"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/material/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "material"
+                ],
+                "summary": "delete materials",
+                "operationId": "8adfa939914c9452e50aa8e1e6d0fe0b",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "not found"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/stores": {
+            "get": {
+                "tags": [
+                    "store"
+                ],
+                "summary": "store",
+                "operationId": "d58e9d0383278721b0f494d112604436",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "not found"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/store/show/{id}": {
+            "get": {
+                "tags": [
+                    "Category"
+                ],
+                "summary": "store details",
+                "operationId": "2ac42d5172a1e333d7591301fc0015b5",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "storeId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "not found"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/store/update/{id}": {
+            "put": {
+                "tags": [
+                    "store"
+                ],
+                "summary": "Update store",
+                "operationId": "9c3ac8c463a378ff3c28d206aad18e93",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "storeId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "how_many": {
                                         "type": "integer"
                                     }
                                 },
@@ -794,17 +979,66 @@
                 ]
             }
         },
-        "/api/items/delete/{id}": {
+        "/api/store/create": {
+            "post": {
+                "tags": [
+                    "store"
+                ],
+                "summary": "create store",
+                "operationId": "c1ea841c7ab96adebf22a9bffa2778eb",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "how_many": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "not found"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/store/delete/{id}": {
             "delete": {
                 "tags": [
-                    "Items"
+                    "store"
                 ],
-                "summary": "delete items",
-                "operationId": "6f356fa09a9ad1ef5a013fda21afe490",
+                "summary": "delete store",
+                "operationId": "af8ba45bb2ea9506fd97a7f635458000",
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
+                        "description": "storeId",
                         "required": true,
                         "schema": {
                             "type": "integer"
@@ -812,95 +1046,7 @@
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {}
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthenticated"
-                    },
-                    "400": {
-                        "description": "Bad Request"
-                    },
-                    "404": {
-                        "description": "not found"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    }
-                },
-                "security": [
-                    {
-                        "sanctum": []
-                    }
-                ]
-            }
-        },
-        "/api/choose/category/{id}": {
-            "post": {
-                "tags": [
-                    "users"
-                ],
-                "summary": "choose category",
-                "operationId": "563e9581a10da285e50a09144a949097",
-                "parameters": [
-                    {
-                        "name": "categoryId",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "application/json": {}
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthenticated"
-                    },
-                    "400": {
-                        "description": "Bad Request"
-                    },
-                    "404": {
-                        "description": "not found"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    }
-                },
-                "security": [
-                    {
-                        "sanctum": []
-                    }
-                ]
-            }
-        },
-        "/api/change/category/{id}": {
-            "put": {
-                "tags": [
-                    "users"
-                ],
-                "summary": "change category",
-                "operationId": "df889707449cc5366eb3625d4ecbfcc3",
-                "parameters": [
-                    {
-                        "name": "categoryId",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
+                    "201": {
                         "description": "Success",
                         "content": {
                             "application/json": {}
@@ -1337,6 +1483,96 @@
                 ],
                 "summary": "delete user",
                 "operationId": "2c349796697ab3946e5399398ce08d92",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "not found"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/choose/material/{id}": {
+            "post": {
+                "tags": [
+                    "material"
+                ],
+                "summary": "choose material you will collect",
+                "operationId": "71749ea280bf1c860efa747070e48a60",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "materialId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "not found"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/change/material/{id}": {
+            "put": {
+                "tags": [
+                    "material"
+                ],
+                "summary": "switch to new material you will collect by changing the old one",
+                "operationId": "1b7590d92474d5918b02d998216aa74e",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "materialId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Success",

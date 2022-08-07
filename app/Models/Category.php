@@ -11,7 +11,6 @@ class Category extends Model
 
     protected $fillable=[
         'name',
-        'counting_id',
         'description'
     ];
 
@@ -20,11 +19,7 @@ class Category extends Model
     ];
 
 
-    public function users(){
-        return $this->belongsToMany(User::class,'category_users');
-    }
-
-    public function items(){
-        return $this->hasMany(CollectedItem::class);
+    public function materials(){
+        return $this->hasMany(RecyclableMaterial::class);
     }
 }

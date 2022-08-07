@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('collect_manufact', function (Blueprint $table) {
+        Schema::create('recyclable_materials', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('coll_id')->unsigned()->index();
-            $table->bigInteger('manu_id')->unsigned()->index();
-            $table->foreign('coll_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('manu_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('name');
+            $table->string('description');
+            $table->bigInteger('category_id')->unsigned()->index();
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('collect_manufact');
+        Schema::dropIfExists('recyclable_materials');
     }
 };

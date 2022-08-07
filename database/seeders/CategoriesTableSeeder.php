@@ -17,15 +17,15 @@ class CategoriesTableSeeder extends Seeder
     {
         Category::create([
             'name'=>'Plastic',
-            'countingUnit'=>'number of items',
+            'description'=>'all about plastics',
         ]);
         Category::create([
             'name' => 'Metals',
-            'countingUnit' => 'in kg',
+            'description' => 'all about metals',
         ]);
         Category::create([
             'name' => 'Electronics',
-            'countingUnit' => 'in kg',
+            'description' => 'all about Electronics',
         ]);
     }
 }

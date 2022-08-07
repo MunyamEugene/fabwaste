@@ -17,12 +17,13 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         User::create([
-            'fname'=>'kalisa',
-            'lname'=>'kiki',
+            'firstName'=>'kalisa',
+            'lastName'=>'kiki',
             'location'=>'Niboye',
             'phone'=>'0789596784',
             'email'=>'kalisa@gmail.com',
             'password'=>Hash::make('password'),
+            'province' => 'Kigali',
             'district'=>'kicukiro',
             'city'=>'kigali',
             'streetNumber'=>'kk105st',
@@ -30,12 +31,13 @@ class UsersTableSeeder extends Seeder
         ]);
 
         User::create([
-            'fname' => 'musangwa',
-            'lname' => 'robert',
+            'firstName' => 'musangwa',
+            'lastName' => 'robert',
             'location' => 'Kanombe',
             'phone' => '0789596784',
             'email' => 'robert@gmail.com',
             'password' => Hash::make('password'),
+            'province' =>'Kigali',
             'district' => 'kicukiro',
             'city' => 'kigali',
             'streetNumber' => 'kk105st',
@@ -48,6 +50,7 @@ class UsersTableSeeder extends Seeder
             'phone' => '0789596723',
             'email' => 'inyange@gmail.com',
             'password' => Hash::make('password'),
+            'province' => 'Kigali',
             'district' => 'Kicukiro',
             'city' => 'kigali',
             'streetNumber' => 'kk105st',
@@ -55,11 +58,12 @@ class UsersTableSeeder extends Seeder
         ]);
 
         User::create([
-            'fname' => 'BRALIRWA',
+            'manufactureName' => 'BRALIRWA',
             'location' => 'sonatubes',
             'phone' => '0789333784',
             'email' => 'bralirwa@gmail.com',
             'password' => Hash::make('password'),
+            'province' => 'Kigali',
             'district' => 'kicukiro',
             'city' => 'kigali',
             'streetNumber' => 'kk304st',
@@ -67,12 +71,13 @@ class UsersTableSeeder extends Seeder
         ]);
 
         User::create([
-            'fname' => 'sam',
-            'lname' => 'john',
+            'firstName' => 'sam',
+            'lastName' => 'john',
             'location' => 'fablab',
             'phone' => '0745893784',
             'email' => 'admin@gmail.com',
             'password' => Hash::make('password'),
+            'province' => 'Kigali',
             'district' => 'gasabo',
             'city' => 'kigali',
             'streetNumber' => 'kg588st',

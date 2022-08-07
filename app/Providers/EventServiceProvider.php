@@ -2,9 +2,9 @@
 
 namespace App\Providers;
 
-use App\Models\CollectedItem;
+use App\Models\Store;
 use App\Models\User;
-use App\Observers\ItemsObserver;
+use App\Observers\StoreObserver;
 use App\Observers\UserObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -31,7 +31,7 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        CollectedItem::observe(ItemsObserver::class);
+        Store::observe(StoreObserver::class);
         User::observe(UserObserver::class);
     }
 

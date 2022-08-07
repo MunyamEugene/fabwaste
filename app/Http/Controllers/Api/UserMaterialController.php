@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
@@ -9,18 +8,20 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 
-class UserCategoryController extends Controller
+class UserMaterialController extends Controller
 {
+
     /**
      * @OA\Post(
-     *   path="/api/choose/category/{id}",
-     *   tags={"users"},
-     *   summary="choose category",
+     *   path="/api/choose/material/{id}",
+     *   tags={"material"},
+     *   summary="choose material you will collect",
      *   security={{"sanctum":{}}},
      *   @OA\Parameter(
-     *      name="categoryId",
+     *      name="id",
      *      in="path",
      *      required=true,
+     *      description="materialId",
      *      @OA\Schema(
      *           type="integer"
      *      ),
@@ -34,7 +35,7 @@ class UserCategoryController extends Controller
      *   ),
      *   @OA\Response(
      *      response=401,
-     *      description="Unauthenticated"
+     *      description="Unauthenticated",
      *   ),
      *   @OA\Response(
      *      response=400,
@@ -50,22 +51,24 @@ class UserCategoryController extends Controller
      *      )
      *)
      **/
-    public function chooseCategory($categoryId)
+    public function chooseMaterialToCollect($id)
     {
+        
         $user = User::findOrFail(Auth::user()->id);
-        $user->categories()->attach($categoryId);
-        return Response::json(['user' => $user->with('categories')->first(), 'status' => 200], 200);
+        $user->materials()->attach($id);
+        return Response::json(['data' =>$user->with('materials'), 'status' => 201], 200);
     }
 
     /**
      * @OA\Put(
-     *   path="/api/change/category/{id}",
-     *   tags={"users"},
-     *   summary="change category",
+     *   path="/api/change/material/{id}",
+     *   tags={"material"},
+     *   summary="switch to new material you will collect by changing the old one",
      *   security={{"sanctum":{}}},
      *   @OA\Parameter(
-     *      name="categoryId",
+     *      name="id",
      *      in="path",
+     *      description="materialId",
      *      required=true,
      *      @OA\Schema(
      *           type="integer"
@@ -96,17 +99,17 @@ class UserCategoryController extends Controller
      *      )
      *)
      **/
-    public function changeCategory($categoryId)
+    public function changeMaterialToCollect($id)
     {
         $user = User::findOrFail(Auth::user()->id);
-        $user->categories()->sync($categoryId);
-        return Response::json(['user' => $user->with('categories')->first(), 'status' => 200], 200);
+        $user->materials()->sync($id);
+        return Response::json(['user' =>$user->with('materials') , 'status' => 201], 200);
     }
 
-    public function removeCategory($categoryId)
+    public function removeMaterial($id)
     {
         $user = User::findOrFail(Auth::user()->id);
-        $user->categories()->detach($categoryId);
-        return Response::json(['user' => $user->with('categories')->first(), 'status' => 200], 200);
+        $user->materials()->detach($id);
+        return Response::json(['message' => 'deleted successfully', 'status' => 200], 200);
     }
 }

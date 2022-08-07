@@ -15,21 +15,21 @@ class AuthController extends Controller
      *   path="/api/collector/register",
      *   tags={"Auth"},
      *   summary="Collector register",
-     *   @OA\RequestBody(
-     *  @OA\JsonContent(
+     *    @OA\RequestBody(
+     *    @OA\JsonContent(
      *    type="object", 
      *    @OA\Property(property="firstName", type="string"),
      *    @OA\Property(property="lastName", type="string"),
-     *  @OA\Property(property="email", type="string"),
+     *    @OA\Property(property="email", type="string"),
      *    @OA\Property(property="password", type="string"),
-     *  @OA\Property(property="password_confirmation", type="string"),
+     *    @OA\Property(property="password_confirmation", type="string"),
      *    @OA\Property(property="location", type="string"),
-     *  @OA\Property(property="phone", type="string"),
-     *  @OA\Property(property="province", type="string"),
-     *   @OA\Property(property="district", type="string"),
-     *  @OA\Property(property="city", type="string"),
+     *    @OA\Property(property="phone", type="string"),
+     *    @OA\Property(property="province", type="string"),
+     *    @OA\Property(property="district", type="string"),
+     *    @OA\Property(property="city", type="string"),
      *    @OA\Property(property="streetNumber", type="string"),
-     *  @OA\Property(property="iscollector", type="boolean", example="true"),
+     *    @OA\Property(property="iscollector", type="boolean", example="true"),
 
      * ),
      * ),
@@ -77,8 +77,8 @@ class AuthController extends Controller
         ]);
 
          User::create([
-            'fname' => $collector['firstName'],
-            'lname' => $collector['lastName'],
+            'firstName' => $collector['firstName'],
+            'lastName' => $collector['lastName'],
             'location' => $collector['location'],
             'phone' => $collector['phone'],
             'province'=>$collector['province'],

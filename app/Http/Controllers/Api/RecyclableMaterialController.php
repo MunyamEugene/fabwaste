@@ -3,19 +3,17 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Category;
-use App\Models\CollectedItem;
+use App\Models\RecyclableMaterial;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 
-class CollectedItemController extends Controller
+class RecyclableMaterialController extends Controller
 {
     /**
      * @OA\Get(
-     *   path="/api/items",
-     *   tags={"Items"},
-     *   summary="Get All Items belongs to you",
+     *   path="/api/materials",
+     *   tags={"material"},
+     *   summary="Get All materials belong to you",
      *   security={{"sanctum":{}}},
      *   @OA\Response(
      *      response=200,
@@ -42,17 +40,17 @@ class CollectedItemController extends Controller
      *      )
      *)
      **/
-    public function GetItems()
+    public function getMaterials()
     {
-        $items = CollectedItem::where('user_id',Auth::user()->id)->with('history')->get();
-        return Response::json(['data' => $items, 'status' => 200], 200);
+        $materials = Auth()->user()->materials()->get();
+        return Response::json(['data' => $materials, 'status' => 200], 200);
     }
 
     /**
      * @OA\Get(
-     *   path="/api/items/show/{id}",
-     *   tags={"Items"},
-     *   summary="Get Items details",
+     *   path="/api/material/show/{id}",
+     *   tags={"material"},
+     *   summary="Get material details",
      *   security={{"sanctum":{}}},
      *   @OA\Response(
      *      response=200,
@@ -64,6 +62,7 @@ class CollectedItemController extends Controller
      *  @OA\Parameter(
      *      name="id",
      *      in="path",
+     *      description="materialId",
      *      required=true,
      *      @OA\Schema(
      *           type="integer"
@@ -89,19 +88,20 @@ class CollectedItemController extends Controller
      **/
     public function show($id)
     {
-        $items = CollectedItem::findOrFail($id);
-        return Response::json(['data' => $items, 'status' => 200]);
+        $material= RecyclableMaterial::findOrFail($id);
+        return Response::json(['data' => $material, 'status' => 200]);
     }
     /**
      * @OA\Put(
-     *   path="/api/items/update/{id}",
-     *   tags={"Items"},
-     *   summary="Update items",
+     *   path="/api/material/update/{id}",
+     *   tags={"material"},
+     *   summary="Update material",
      *   security={{"sanctum":{}}},
      *  @OA\Parameter(
      *      name="id",
      *      in="path",
      *      required=true,
+     *      description="materialId",
      *      @OA\Schema(
      *           type="integer"
      *      ),
@@ -110,7 +110,7 @@ class CollectedItemController extends Controller
      *  @OA\JsonContent(
      *    type="object", 
      *    @OA\Property(property="name", type="string"),
-     *    @OA\Property(property="quantity", type="integer"),
+     *    @OA\Property(property="description", type="string"),
      * 
      * ),
      * ),
@@ -141,29 +141,25 @@ class CollectedItemController extends Controller
      **/
     public function update(Request $request, $id)
     {
-        $request->validate(['name' => 'required', 'quantity'=> 'required|numeric']);
-        $items = CollectedItem::findOrFail($id);
-        $quantity=$request->input('quantity');
-        if(($quantity+$items->quantity)>=0){
-            $items->collected_items_name = $request->input('name');
-            $items->quantity = ($items->quantity + $request->input('quantity'));
-            $items->save();
-            return Response::json(['message' => 'updated successfully', 'status' => 200], 200);
-        }
-        return Response::json(['message' => 'you entered wrong numbers', 'status' => ($quantity - $items->quantity) < 0], 400);
-        
+        $request->validate(['name' => 'required', 'description' => 'required']);
+        $material = RecyclableMaterial::findOrFail($id);
+        $material->name = $request->input('name');
+        $material->description=$request->input('description');
+        $material->save();
+        return Response::json(['message' => 'updated successfully', 'status'=>201]);
     }
 
     /**
      * @OA\Post(
-     *   path="/api/items/create/{categoryId}",
-     *   tags={"Items"},
-     *   summary="Add items",
+     *   path="/api/material/create/{id}",
+     *   tags={"material"},
+     *   summary="what are materials they collect",
      *   security={{"sanctum":{}}},
      * @OA\Parameter(
-     *      name="categoryId",
+     *      name="id",
      *      in="path",
      *      required=true,
+     *      description="categoryId",
      *      @OA\Schema(
      *           type="integer"
      *      ),
@@ -172,7 +168,7 @@ class CollectedItemController extends Controller
      *  @OA\JsonContent(
      *    type="object", 
      *    @OA\Property(property="name", type="string"),
-     *    @OA\Property(property="quantity", type="integer"),
+     *    @OA\Property(property="description", type="string"),
      * 
      * ),
      * ),
@@ -201,23 +197,22 @@ class CollectedItemController extends Controller
      *      )
      *)
      **/
-    public function create(Request $request,$categoryId)
+    public function create(Request $request, $id)
     {
-        $request->validate(['name' => 'required', 'quantity' => 'required|numeric']);
-        $items = new CollectedItem();
-        $items->collected_items_name = $request->input('name');
-        $items->quantity = $request->input('quantity');
-        $items->user_id=Auth::user()->id;
-        $items->category_id= $categoryId;
-        $items->save();
-        return Response::json(['message' => 'created successfully', 'status' => 200], 200);
+        $request->validate(['name' => 'required', 'description' => 'required']);
+        $material = new RecyclableMaterial();
+        $material->name = $request->input('name');
+        $material->description = $request->input('description');
+        $material->category_id = $id;
+        $material->save();
+        return Response::json(['message' => 'created successfully', 'status' => 201]);
     }
 
     /**
      * @OA\Delete(
-     *   path="/api/items/delete/{id}",
-     *   tags={"Items"},
-     *   summary="delete items",
+     *   path="/api/material/delete/{id}",
+     *   tags={"material"},
+     *   summary="delete materials",
      *   security={{"sanctum":{}}},
      *  @OA\Parameter(
      *      name="id",
@@ -252,9 +247,10 @@ class CollectedItemController extends Controller
      *      )
      *)
      **/
-    public function delete($id){
-        $items=CollectedItem::find($id);
-        $items->delete();
-        return Response::json(['message'=>'items deleted successfully','status'=>200],200);
+    public function delete($id)
+    {
+        $material = RecyclableMaterial::find($id);
+        $material->delete();
+        return Response::json(['message' => 'deleted successfully'], 200);
     }
 }

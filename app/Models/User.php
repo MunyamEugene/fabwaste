@@ -20,8 +20,8 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'fname',
-        'lname',
+        'firstName',
+        'lastName',
         'phone',
         'location',
         'email',
@@ -36,7 +36,6 @@ class User extends Authenticatable
         'isadmin',
         'ismanufacture',
         'manufactureName',
-        'manufactureEmail',
     ];
 
     /**
@@ -59,21 +58,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function categories()
-    {
-        return $this->belongsToMany(Category::class, 'category_users');
-    }
 
-    public function items()
-    {
-        return $this->hasMany(CollectedItem::class);
-    }
 
-    public function collectors(){
-        return $this->belongsToMany(User::class,'collect_manufact', 'manu_id','coll_id');
-    }
-    public function manufactures(){
-        return $this->belongsToMany(User::class, 'collect_manufact', 'coll_id', 'manu_id');
+    public function materials(){
+        return $this->belongsToMany(RecyclableMaterial::class, 'user_materials');
     }
     
     public function sendPasswordResetNotification($token){

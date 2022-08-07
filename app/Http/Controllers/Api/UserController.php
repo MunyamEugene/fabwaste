@@ -44,7 +44,7 @@ class UserController extends Controller
      * ),
      */
     public function getUsers(){
-        $users=User::with('categories.items.history')->get();
+        $users=User::all();
         return Response::json(['users'=>$users,'status'=>200],200);
     }
 

@@ -13,12 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('collected_items', function (Blueprint $table) {
+        Schema::create('store_histories', function (Blueprint $table) {
             $table->id();
-            $table->string('collected_items_name');
-            $table->integer('quantity');
-            $table->foreignId('category_id');
-            $table->foreignId('user_id');
+            $table->integer('previousData')->default(0);
+            $table->integer('changes')->default(0);
+            $table->integer('newData')->default(0);
+            $table->bigInteger('store_id')->unsigned()->index();
+            $table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -30,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('collected_items');
+        Schema::dropIfExists('store_histories');
     }
 };

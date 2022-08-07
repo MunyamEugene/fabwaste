@@ -13,12 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('category_users', function (Blueprint $table) {
+        Schema::create('stores', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('user_id')->unsigned()->index();
-             $table->bigInteger('category_id')->unsigned()->index();
-             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->integer("how_many")->default(0);
+            $table->bigInteger('material_id')->unsigned()->index();
+            $table->foreign('material_id')->references('id')->on('recyclable_materials')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('category_users');
+        Schema::dropIfExists('stores');
     }
 };
